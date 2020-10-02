@@ -1,8 +1,8 @@
 extends KinematicBody
 
-const speed = {walk = 4, run = 10, crouch = 2, air = 2}
+const speed = {walk = 4, run = 10, crouch = 2, air = 0.01}
 const friction = {ground = 0.7, air = 1}
-const sensitivity = {mouse = 0.03}
+const sensitivity = {mouse = 0.04}
 const gravity = 60
 const jump = 20
 
@@ -38,26 +38,25 @@ func _physics_process(delta):
 		linear_velocity += direction.normalized() * speed.air
 	
 	#GRAVITY
+	linear_velocity.y -= gravity * delta
+	
+	#FRICTION
 	if is_on_floor():
-		linear_velocity += -get_floor_normal() * gravity * delta
 		linear_velocity.x *= friction.ground
 		linear_velocity.z *= friction.ground
-		if Input.is_action_just_pressed("jump"):
-			linear_velocity.y = jump 
-		print("Yes")
 	else:
-		linear_velocity += Vector3.DOWN * gravity * delta
 		linear_velocity.x *= friction.air
 		linear_velocity.z *= friction.air
-		print("No")
 	
-	#INT CONVERSION
-	var x = int(linear_velocity.x)
-	var y = int(linear_velocity.y)
-	var z = int(linear_velocity.z)
-	linear_velocity = Vector3(x,y,z)
-	
+	if is_on_floor():
+		print("On floor")
+		if Input.is_action_just_pressed("jump"):
+			linear_velocity.y += jump
+	else:
+		print("Not on floor")
+
 	linear_velocity = move_and_slide(linear_velocity, Vector3.UP)
+	
 	
 	if Input.is_action_just_pressed("ui_cancel"):
 		get_tree().quit()
