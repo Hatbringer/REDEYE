@@ -3,8 +3,8 @@ extends KinematicBody
 const speed = {walk = 4, run = 10, crouch = 2, air = 0.01}
 const friction = {ground = 0.7, air = 1}
 const sensitivity = {mouse = 0.04}
-const gravity = 60
-const jump = 20
+const gravity = {up = 30, down = 50}
+const jump = 10
 
 var input_speed = Vector3()
 var linear_velocity = Vector3()
@@ -32,13 +32,23 @@ func _physics_process(delta):
 	else:
 		input_speed = speed.run
 	
+	#Crouching
+	if Input.is_action_pressed("crouch"):
+		$Hitbox.shape.height -= 100 * delta
+	elif !$Roof.is_colliding():
+		$Hitbox.shape.height += 16 * delta
+	$Hitbox.shape.height = clamp($Hitbox.shape.height, 1, 4)
+	
 	if is_on_floor():
 		linear_velocity += direction.normalized() * input_speed
 	else:
 		linear_velocity += direction.normalized() * speed.air
 	
 	#GRAVITY
-	linear_velocity.y -= gravity * delta
+	if Input.is_action_pressed("jump") and linear_velocity.y > 0:
+		linear_velocity.y -= gravity.up * delta
+	else:
+		linear_velocity.y -= gravity.down * delta
 	
 	#FRICTION
 	if is_on_floor():
