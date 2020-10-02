@@ -1,17 +1,19 @@
 extends KinematicBody
 
-const speed = {walk = 8, run = 20, air = 0.2}
-const friction = {ground = 0.7, air = 0.99}
+const speed = {walk = 4, run = 10, crouch = 2, air = 2}
+const friction = {ground = 0.7, air = 1}
 const sensitivity = {mouse = 0.03}
-const gravity = 100
+const gravity = 60
 const jump = 20
 
+var input_speed = Vector3()
 var linear_velocity = Vector3()
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _physics_process(delta):
+	#LATERAL INPUT
 	var direction = Vector3()
 	if Input.is_action_pressed("forward"):
 		direction -= transform.basis.z
@@ -22,8 +24,16 @@ func _physics_process(delta):
 	if Input.is_action_pressed("right"):
 		direction += transform.basis.x
 	
+	#DETERMINE SPEED
+	if Input.is_action_pressed("crouch"):
+		input_speed = speed.crouch
+	elif Input.is_action_pressed("walk"):
+		input_speed = speed.walk
+	else:
+		input_speed = speed.run
+	
 	if is_on_floor():
-		linear_velocity += direction.normalized() * speed.walk
+		linear_velocity += direction.normalized() * input_speed
 	else:
 		linear_velocity += direction.normalized() * speed.air
 	
@@ -48,7 +58,6 @@ func _physics_process(delta):
 	linear_velocity = Vector3(x,y,z)
 	
 	linear_velocity = move_and_slide(linear_velocity, Vector3.UP)
-	print(linear_velocity)
 	
 	if Input.is_action_just_pressed("ui_cancel"):
 		get_tree().quit()
