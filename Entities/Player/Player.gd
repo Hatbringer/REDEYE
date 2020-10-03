@@ -1,10 +1,12 @@
 extends KinematicBody
 
-const speed = {walk = 4, run = 10, crouch = 2, air = 0.01}
+const speed = {walk = 4, run = 8, crouch = 2, air = 0.01}
 const friction = {ground = 0.7, air = 1}
 const sensitivity = {mouse = 0.04}
 const gravity = {up = 30, down = 50}
 const jump = 10
+
+onready var Interact = $Head/Interact
 
 var input_speed = Vector3()
 var linear_velocity = Vector3()
@@ -59,18 +61,28 @@ func _physics_process(delta):
 		linear_velocity.z *= friction.air
 	
 	if is_on_floor():
-		print("On floor")
+		#print("On floor")
 		if Input.is_action_just_pressed("jump"):
 			linear_velocity.y += jump
 	else:
-		print("Not on floor")
+		#print("Not on floor")
+		pass
 
 	linear_velocity = move_and_slide(linear_velocity, Vector3.UP)
 	
-	
+	#QUIT GAME
 	if Input.is_action_just_pressed("ui_cancel"):
 		get_tree().quit()
 
+	#PICKUP WEAPON
+	if Interact.is_colliding():
+		var Body = Interact.get_collider()
+		print(Body)
+		if Body.is_in_group("weapon"):
+			Body.equip(self)
+			print("Sucess!")
+		
+#Camera rotation
 func _input(event):
 	if event is InputEventMouseMotion:
 		rotate_y(deg2rad(-event.relative.x * sensitivity.mouse))
