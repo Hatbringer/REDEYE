@@ -85,13 +85,14 @@ func _physics_process(delta):
 	if $Head/Hand.get_child_count() > 0:
 		var Target = $Head/Camera/Aim.get_collision_point()
 		var Weapon = $Head/Hand.get_child(0)
+		#Weapon adjustment (Needs lerping)
 		if $Head/Camera/Aim.is_colliding():
 			Weapon.look_at(Target, Vector3.UP)
 		else:
 			Weapon.rotation = $Head/Camera.rotation
+		#Dropping
 		if Input.is_action_just_pressed("drop"):
 			Weapon.drop()
-		
 		
 #Camera rotation
 func _input(event):
