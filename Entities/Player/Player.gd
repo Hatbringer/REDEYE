@@ -81,10 +81,14 @@ func _physics_process(delta):
 		if Body.is_in_group("weapon"):
 			Body.equip(self)
 			print("Sucess!")
-	#DROP WEAPON
-	if Input.is_action_just_pressed("drop"):
-		if $Head/Hand.get_child_count() > 0:
-			$Head/Hand.get_child(0).drop()
+	#WEAPON LOGIC
+	if $Head/Hand.get_child_count() > 0:
+		var Target = $Head/Camera/Aim.get_collision_point()
+		var Weapon = $Head/Hand.get_child(0)
+		Weapon.look_at(Target, Vector3.UP)
+		if Input.is_action_just_pressed("drop"):
+			Weapon.drop()
+		
 		
 #Camera rotation
 func _input(event):
