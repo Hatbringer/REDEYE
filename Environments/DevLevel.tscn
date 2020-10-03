@@ -1,8 +1,17 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Entities/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Entities/Guard/Guard.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Items/Magnum.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Textures/RaisedTile/normal.png" type="Texture" id=4]
+[ext_resource path="res://Textures/RaisedTile/texture.png" type="Texture" id=5]
+
+[sub_resource type="SpatialMaterial" id=1]
+albedo_texture = ExtResource( 5 )
+normal_enabled = true
+normal_scale = 1.0
+normal_texture = ExtResource( 4 )
+uv1_triplanar = true
 
 [node name="DevLevel" type="Spatial"]
 
@@ -13,6 +22,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0 )
 use_collision = true
 width = 48.8022
 depth = 42.6724
+material = SubResource( 1 )
 
 [node name="Guard" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0 )
