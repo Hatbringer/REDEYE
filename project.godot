@@ -91,6 +91,11 @@ drop={
 [physics]
 
 3d/physics_engine="GodotPhysics"
+3d/default_gravity=20.0
+
+[physics3d]
+
+quit_on_go_back=false
 
 [rendering]
 

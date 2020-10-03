@@ -90,6 +90,9 @@ func _physics_process(delta):
 			Weapon.look_at(Target, Vector3.UP)
 		else:
 			Weapon.rotation = $Head/Camera.rotation
+		#Shooting
+		if Input.is_action_just_pressed("primary") and Weapon.has_method("shoot"):
+			Weapon.shoot()
 		#Dropping
 		if Input.is_action_just_pressed("drop"):
 			Weapon.drop()

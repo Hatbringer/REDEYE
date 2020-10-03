@@ -17,6 +17,8 @@ extents = Vector3( 0.25, 0.25, 1 )
 ]]
 collision_layer = 4
 script = ExtResource( 1 )
+spread = Vector2( 4, 4 )
+stability = 1.1
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 mesh = SubResource( 2 )
