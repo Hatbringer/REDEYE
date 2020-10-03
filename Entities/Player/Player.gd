@@ -75,12 +75,16 @@ func _physics_process(delta):
 		get_tree().quit()
 
 	#PICKUP WEAPON
-	if Interact.is_colliding():
+	if Interact.is_colliding() and Input.is_action_just_pressed("interact"):
 		var Body = Interact.get_collider()
 		print(Body.get_name())
 		if Body.is_in_group("weapon"):
 			Body.equip(self)
 			print("Sucess!")
+	#DROP WEAPON
+	if Input.is_action_just_pressed("drop"):
+		if $Head/Hand.get_child_count() > 0:
+			$Head/Hand.get_child(0).drop()
 		
 #Camera rotation
 func _input(event):

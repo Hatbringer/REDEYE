@@ -1,16 +1,19 @@
 extends "res://Items/Weapon.gd"
+onready var b_decal = preload("res://Items/BulletDecal.tscn")
 
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+	
+func _physics_process(delta):
+	if Input.is_action_just_pressed("primary"):
+		print("Hello")
+		if $RayCast.is_colliding():
+			#$Particles.emitting = true
+			var b = b_decal.instance()
+			$RayCast.get_collider().add_child(b)
+			b.set_as_toplevel(true)
+			b.global_transform.origin = $RayCast.get_collision_point()
+			b.look_at($RayCast.get_collision_point() + $RayCast.get_collision_normal(), Vector3.UP)
+		else:
+			#$Particles.emitting = true
+			pass
