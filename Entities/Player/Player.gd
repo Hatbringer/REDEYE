@@ -6,7 +6,7 @@ const sensitivity = {mouse = 0.04}
 const gravity = {up = 30, down = 50}
 const jump = 10
 
-onready var Interact = $Head/Interact
+onready var Interact = $Head/Camera/Interact
 
 var input_speed = Vector3()
 var linear_velocity = Vector3()
@@ -77,7 +77,7 @@ func _physics_process(delta):
 	#PICKUP WEAPON
 	if Interact.is_colliding():
 		var Body = Interact.get_collider()
-		print(Body)
+		print(Body.get_name())
 		if Body.is_in_group("weapon"):
 			Body.equip(self)
 			print("Sucess!")
