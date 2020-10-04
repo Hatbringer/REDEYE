@@ -1,6 +1,6 @@
 extends KinematicBody
 
-const speed = {walk = 4, run = 8, crouch = 2, air = 0.2}
+const speed = {walk = 2, run = 4, crouch = 1, air = 0.2}
 const friction = {ground = 0.7, air = 1}
 const sensitivity = {mouse = 0.04}
 const gravity = {up = 20, down = 50}
@@ -40,7 +40,7 @@ func _physics_process(delta):
 		$Hitbox.shape.height -= 100 * delta
 	elif !$Roof.is_colliding():
 		$Hitbox.shape.height += 16 * delta
-	$Hitbox.shape.height = clamp($Hitbox.shape.height, 1, 4)
+	$Hitbox.shape.height = clamp($Hitbox.shape.height, 0, 1.5)
 	
 	if is_on_floor():
 		linear_velocity += direction.normalized() * input_speed
@@ -100,7 +100,7 @@ func _physics_process(delta):
 			Weapon.drop()
 	#KICK
 	rotation.y += angular_velocity.x
-	$Head/Camera.rotation /= 1.1
+	$Head/Camera.rotation /= 1.3
 	$Head/Camera.rotation.x += angular_velocity.y
 	angular_velocity /= 1.1
 	

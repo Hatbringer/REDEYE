@@ -21,5 +21,5 @@ func shoot(Attacker):
 		spin.y += deg2rad(kick.y)
 		spin /= stability
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	$RayCast.rotation /= stability

@@ -1,27 +1,95 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Entities/Guard/Guard.gd" type="Script" id=1]
+[ext_resource path="res://Textures/Phantom.png" type="Texture" id=2]
 
-[sub_resource type="CapsuleShape" id=4]
-height = 4.0
+[sub_resource type="CapsuleShape" id=1]
+height = 1.63502
 
-[sub_resource type="SpatialMaterial" id=2]
-albedo_color = Color( 1, 0.133333, 0.133333, 1 )
+[sub_resource type="AtlasTexture" id=2]
+flags = 19
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 64, 64 )
 
-[sub_resource type="CapsuleMesh" id=3]
-material = SubResource( 2 )
-mid_height = 4.0
+[sub_resource type="AtlasTexture" id=3]
+flags = 19
+atlas = ExtResource( 2 )
+region = Rect2( 64, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=4]
+flags = 19
+atlas = ExtResource( 2 )
+region = Rect2( 128, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=5]
+flags = 19
+atlas = ExtResource( 2 )
+region = Rect2( 192, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=6]
+flags = 19
+atlas = ExtResource( 2 )
+region = Rect2( 256, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=7]
+flags = 19
+atlas = ExtResource( 2 )
+region = Rect2( 320, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=8]
+flags = 19
+atlas = ExtResource( 2 )
+region = Rect2( 384, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=9]
+flags = 19
+atlas = ExtResource( 2 )
+region = Rect2( 448, 0, 64, 64 )
+
+[sub_resource type="SpriteFrames" id=10]
+animations = [ {
+"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
+"loop": true,
+"name": "default",
+"speed": 10.0
+} ]
+
+[sub_resource type="CapsuleShape" id=13]
+radius = 0.4
+height = 2.02
+
+[sub_resource type="SphereShape" id=12]
+radius = 0.361784
 
 [node name="Guard" type="KinematicBody"]
-collision_layer = 8
-collision_mask = 3
 script = ExtResource( 1 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
-shape = SubResource( 4 )
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, -0.145868, 0 )
+shape = SubResource( 1 )
 
-[node name="MeshInstance" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
-mesh = SubResource( 3 )
-material/0 = null
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+opacity = 0.9
+pixel_size = 0.05
+billboard = 2
+shaded = true
+frames = SubResource( 10 )
+frame = 5
+playing = true
+
+[node name="Body" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0572776, 1.21237, 0.0932558 )
+collision_layer = 0
+collision_mask = 2147483648
+
+[node name="CollisionShape" type="CollisionShape" parent="Body"]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, -1.551, 0 )
+shape = SubResource( 13 )
+
+[node name="Head" type="Area" parent="."]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape" type="CollisionShape" parent="Head"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0572776, 1.21237, 0.0932558 )
+shape = SubResource( 12 )

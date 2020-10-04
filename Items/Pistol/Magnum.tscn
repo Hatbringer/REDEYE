@@ -14,7 +14,8 @@ extents = Vector3( 0.103328, 0.170691, 0.602249 )
 ]]
 collision_layer = 4
 script = ExtResource( 1 )
-spread = Vector2( 1.5, 1.5 )
+spread = Vector2( 8, 8 )
+stability = 1.2
 kick = Vector2( 0.1, 1 )
 
 [node name="Mesh" type="MeshInstance" parent="."]
