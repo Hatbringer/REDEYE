@@ -1,15 +1,16 @@
 extends KinematicBody
 
-const speed = {walk = 4, run = 8, crouch = 2, air = 0.01}
+const speed = {walk = 4, run = 8, crouch = 2, air = 0.2}
 const friction = {ground = 0.7, air = 1}
 const sensitivity = {mouse = 0.04}
-const gravity = {up = 30, down = 50}
-const jump = 10
+const gravity = {up = 20, down = 50}
+const jump = 12
 
 onready var Interact = $Head/Camera/Interact
 
 var input_speed = Vector3()
 var linear_velocity = Vector3()
+var angular_velocity = Vector3()
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -82,21 +83,27 @@ func _physics_process(delta):
 			Body.equip(self)
 			print("Sucess!")
 	#WEAPON LOGIC
-	if $Head/Hand.get_child_count() > 0:
+	if $Head/Hand.get_child_count() > 1:
 		var Target = $Head/Camera/Aim.get_collision_point()
-		var Weapon = $Head/Hand.get_child(0)
+		var Weapon = $Head/Hand.get_child(1)
 		#Weapon adjustment (Needs lerping)
 		if $Head/Camera/Aim.is_colliding():
-			Weapon.look_at(Target, Vector3.UP)
+			$Head/Hand/Pointer.look_at(Target,Vector3.UP)
 		else:
-			Weapon.rotation = $Head/Camera.rotation
+			$Head/Hand/Pointer.rotation = $Head/Camera.rotation
+		Weapon.rotation += ($Head/Hand/Pointer.rotation - Weapon.rotation) / 10
 		#Shooting
 		if Input.is_action_just_pressed("primary") and Weapon.has_method("shoot"):
-			Weapon.shoot()
+			Weapon.shoot(self)
 		#Dropping
 		if Input.is_action_just_pressed("drop"):
 			Weapon.drop()
-		
+	#KICK
+	rotation.y += angular_velocity.x
+	$Head/Camera.rotation /= 1.1
+	$Head/Camera.rotation.x += angular_velocity.y
+	angular_velocity /= 1.1
+	
 #Camera rotation
 func _input(event):
 	if event is InputEventMouseMotion:
