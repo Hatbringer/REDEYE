@@ -52,5 +52,5 @@ text = "New Game"
 [node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer"]
 margin_top = 24.0
 margin_right = 384.0
-margin_bottom = 478.0
+margin_bottom = 24.0
 text = "Warning. This game features mature themes and flashing lights."
