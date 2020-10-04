@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/LargeWall.obj-64cc838f3b013b48bd0a2bdcd63c7aad.mesh"
+
+[deps]
+
+files=[ "res://.import/LargeWall.obj-64cc838f3b013b48bd0a2bdcd63c7aad.mesh" ]
+
+source_file="res://Tiles/LargeWall.obj"
+dest_files=[ "res://.import/LargeWall.obj-64cc838f3b013b48bd0a2bdcd63c7aad.mesh", "res://.import/LargeWall.obj-64cc838f3b013b48bd0a2bdcd63c7aad.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true
