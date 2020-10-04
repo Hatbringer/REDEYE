@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/normal.png-6e12741385c2c88acb14983848b216bc.s3tc.stex"
-path.etc2="res://.import/normal.png-6e12741385c2c88acb14983848b216bc.etc2.stex"
+path.s3tc="res://.import/computer.png-073123de5a81c7d9cbc9287846660c68.s3tc.stex"
+path.etc2="res://.import/computer.png-073123de5a81c7d9cbc9287846660c68.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Textures/CleanFloor/normal.png"
-dest_files=[ "res://.import/normal.png-6e12741385c2c88acb14983848b216bc.s3tc.stex", "res://.import/normal.png-6e12741385c2c88acb14983848b216bc.etc2.stex" ]
+source_file="res://Textures/Computer/computer.png"
+dest_files=[ "res://.import/computer.png-073123de5a81c7d9cbc9287846660c68.s3tc.stex", "res://.import/computer.png-073123de5a81c7d9cbc9287846660c68.etc2.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/mode=2
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
-compress/normal_map=1
+compress/normal_map=0
 flags/repeat=true
 flags/filter=false
 flags/mipmaps=false
