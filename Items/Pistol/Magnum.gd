@@ -3,6 +3,7 @@ extends "res://Items/Weapon.gd"
 var spin = Vector3()
 
 func shoot(Attacker):
+	$ShootSFX.play()
 	var current_spread = Vector2(rand_range(-spread.x,spread.x),rand_range(-spread.y,spread.y))
 	print(current_spread)
 

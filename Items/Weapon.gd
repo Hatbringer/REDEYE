@@ -29,6 +29,6 @@ func drop():
 func bullet_hole():
 	var BulletHole = b_decal.instance()
 	$RayCast.get_collider().add_child(BulletHole)
-	BulletHole.set_as_toplevel(true)
+	#BulletHole.set_as_toplevel(true)
 	BulletHole.global_transform.origin = $RayCast.get_collision_point()
 	BulletHole.look_at($RayCast.get_collision_point() + $RayCast.get_collision_normal(), Vector3.UP)
