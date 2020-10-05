@@ -24,9 +24,26 @@ func _on_Sight_body_shape_entered(body_id, body, body_shape, area_shape):
 			Target = body
 			state = "seeking"
 
-func seeking():
+func can_see(Target):
 	var collision = direct_state.intersect_ray(transform.origin + Vector3(0,2,0), Target.transform.origin + Vector3(0,2,0))
 	if collision:
-		print("No" + str(collision.position))
+		return false
 	else:
-		print("Can See")
+		return true
+
+func seeking():
+	if can_see(Target):
+		if $Reaction.is_stopped():
+			$Reaction.start()
+			print("Noticed player...")
+
+
+func _on_Reaction_timeout():
+	#$Hand.look_at(Target.transform.origin)
+	$Hand/OmniLight.show()
+	print("Attacking!")
+	if can_see(Target):
+		print("Dead")
+		Target.health -= 1
+	else:
+		print("Target escaped!")

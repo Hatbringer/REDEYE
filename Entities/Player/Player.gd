@@ -12,6 +12,8 @@ var input_speed = Vector3()
 var linear_velocity = Vector3()
 var angular_velocity = Vector3()
 
+var health = 3
+
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
@@ -103,6 +105,10 @@ func _physics_process(delta):
 	$Head/Camera.rotation /= 1.3
 	$Head/Camera.rotation.x += angular_velocity.y
 	angular_velocity /= 1.1
+	
+	#HEALTH
+	if health < 1:
+		get_tree().reload_current_scene()
 	
 #Camera rotation
 func _input(event):
