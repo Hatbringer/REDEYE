@@ -2,8 +2,8 @@ extends RigidBody
 
 onready var b_decal = preload("res://Items/BulletDecal.tscn")
 
-export(float) var damage = 0
-export(float) var crit = 0
+export(float) var damage = 1
+export(float) var crit = 2
 export var spread = Vector2(0,0)
 export(float) var stability = 2
 export var kick = Vector2(0,0)

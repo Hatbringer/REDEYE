@@ -2,16 +2,23 @@ extends "res://Items/Weapon.gd"
 
 var spin = Vector3()
 
+onready var Model = $Mesh
+
 func shoot(Attacker):
 	$ShootSFX.play()
 	var current_spread = Vector2(rand_range(-spread.x,spread.x),rand_range(-spread.y,spread.y))
-	print(current_spread)
 
 	if $RayCast.is_colliding():
 		var Target = $RayCast.get_collider()
-		if not Target.get("health") == null:
-			Target.health -= damage.normal
-		bullet_hole()
+		print("magnum hit" + Target.get_name())
+		if Target.is_in_group("crit"):
+			Target.get_parent().health -= crit
+			print("Hit! Enemy health: " + str(Target.get_parent().health))
+		elif Target.is_in_group("normal"):
+			Target.get_parent().health -= damage
+			print("Hit! Enemy health: " + str(Target.get_parent().health))
+		else:
+			bullet_hole()
 	#SPREAD
 	$RayCast.rotation += Vector3(deg2rad(current_spread.x),deg2rad(current_spread.y),0)
 	#KICK

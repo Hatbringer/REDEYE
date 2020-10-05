@@ -4,6 +4,8 @@ var linear_velocity = Vector3()
 var state = "idle"
 var Target = null
 
+var health = 4
+
 func _physics_process(delta):
 	#GRAVITY
 	linear_velocity.y -= 10 * delta
@@ -15,6 +17,10 @@ func _physics_process(delta):
 	#STATE
 	if has_method(state):
 		call(state)
+	
+	#HEALTH
+	if health < 1:
+		queue_free()
 
 onready var direct_state = get_world().direct_space_state
 func _on_Sight_body_shape_entered(body_id, body, body_shape, area_shape):
@@ -41,9 +47,6 @@ func seeking():
 func _on_Reaction_timeout():
 	#$Hand.look_at(Target.transform.origin)
 	$Hand/OmniLight.show()
-	print("Attacking!")
 	if can_see(Target):
-		print("Dead")
 		Target.health -= 1
-	else:
-		print("Target escaped!")
+	state = "idle"

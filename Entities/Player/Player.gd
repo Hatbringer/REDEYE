@@ -1,5 +1,6 @@
 extends KinematicBody
 
+const height = {crouch = 1.5, stand = 4}
 const speed = {walk = 1.5, run = 4, crouch = 1, air = 0.2}
 const friction = {ground = 0.7, air = 0.98}
 const sensitivity = {mouse = 0.12}
@@ -42,7 +43,7 @@ func _physics_process(delta):
 		$Hitbox.shape.height -= 100 * delta
 	elif !$Roof.is_colliding():
 		$Hitbox.shape.height += 16 * delta
-	$Hitbox.shape.height = clamp($Hitbox.shape.height, 0, 1.5)
+	$Hitbox.shape.height = clamp($Hitbox.shape.height, height.crouch, height.stand)
 	
 	if is_on_floor():
 		linear_velocity += direction.normalized() * input_speed
@@ -100,15 +101,22 @@ func _physics_process(delta):
 		#Dropping
 		if Input.is_action_just_pressed("drop"):
 			Weapon.drop()
+	#AIMING
+	if Input.is_action_pressed("secondary"):
+		$Head/Hand.translation += (Vector3(0, -0.55, -0.5) - $Head/Hand.translation) / 10
+		$Head/Camera.fov = 60
+	else:
+		$Head/Hand.translation += (Vector3(0.6, -0.55, -1) - $Head/Hand.translation) / 10
+		$Head/Camera.fov = 70
 	#KICK
 	rotation.y += angular_velocity.x
-	$Head/Camera.rotation /= 1.3
+	$Head/Camera.rotation /= 2
 	$Head/Camera.rotation.x += angular_velocity.y
 	angular_velocity /= 1.1
 	
 	#HEALTH
-	if health < 1:
-		get_tree().reload_current_scene()
+#	if health < 1:
+#		get_tree().reload_current_scene()
 	
 #Camera rotation
 func _input(event):

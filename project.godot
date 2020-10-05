@@ -21,8 +21,6 @@ config/icon="res://Textures/icon.png"
 
 [display]
 
-window/size/width=420
-window/size/height=180
 window/size/fullscreen=true
 window/stretch/mode="viewport"
 window/stretch/aspect="keep"
@@ -111,9 +109,10 @@ drop={
 [layer_names]
 
 3d_physics/layer_1="Terrain"
-3d_physics/layer_2="Player"
+3d_physics/layer_2="Entity"
 3d_physics/layer_3="Interactables"
-3d_physics/layer_4="Enemies"
+3d_physics/layer_4="Damageable"
+3d_physics/layer_5="Player"
 
 [physics]
 
