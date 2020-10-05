@@ -7,7 +7,7 @@ func _physics_process(delta):
 	if Sensors.overlaps_body(Player):
 		$KinematicBody.translation.y -= ($KinematicBody.translation.y + 3.9) / 10
 	else:
-		$KinematicBody.translation.y /= 1.1
+		$KinematicBody.translation.y /= 1.08
 
 func _on_Area_body_shape_entered(body_id, body, body_shape, area_shape):
 	if body == Player:

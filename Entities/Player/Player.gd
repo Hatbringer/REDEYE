@@ -1,9 +1,9 @@
 extends KinematicBody
 
-const speed = {walk = 2, run = 4, crouch = 1, air = 0.2}
-const friction = {ground = 0.7, air = 1}
-const sensitivity = {mouse = 0.04}
-const gravity = {up = 20, down = 50}
+const speed = {walk = 1.5, run = 4, crouch = 1, air = 0.2}
+const friction = {ground = 0.7, air = 0.98}
+const sensitivity = {mouse = 0.12}
+const gravity = {up = 40, down = 50}
 const jump = 12
 
 onready var Interact = $Head/Camera/Interact
@@ -69,7 +69,7 @@ func _physics_process(delta):
 		#print("Not on floor")
 		pass
 
-	linear_velocity = move_and_slide(linear_velocity, Vector3.UP)
+	linear_velocity = move_and_slide(linear_velocity, Vector3.UP, true)
 	
 	#QUIT GAME
 	if Input.is_action_just_pressed("ui_cancel"):

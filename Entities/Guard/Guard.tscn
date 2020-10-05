@@ -1,10 +1,11 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Entities/Guard/Guard.gd" type="Script" id=1]
 [ext_resource path="res://Textures/Phantom.png" type="Texture" id=2]
 
 [sub_resource type="CapsuleShape" id=1]
-height = 1.63502
+radius = 0.4
+height = 2.5
 
 [sub_resource type="AtlasTexture" id=2]
 flags = 19
@@ -54,14 +55,19 @@ animations = [ {
 "speed": 10.0
 } ]
 
-[sub_resource type="CapsuleShape" id=13]
+[sub_resource type="CapsuleShape" id=11]
 radius = 0.4
 height = 2.02
 
 [sub_resource type="SphereShape" id=12]
 radius = 0.361784
 
+[sub_resource type="BoxShape" id=13]
+extents = Vector3( 4, 2, 12 )
+
 [node name="Guard" type="KinematicBody"]
+collision_layer = 2
+collision_mask = 3
 script = ExtResource( 1 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
@@ -74,22 +80,31 @@ pixel_size = 0.05
 billboard = 2
 shaded = true
 frames = SubResource( 10 )
-frame = 5
+frame = 3
 playing = true
 
-[node name="Body" type="Area" parent="."]
+[node name="Body" type="StaticBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0572776, 1.21237, 0.0932558 )
-collision_layer = 0
+collision_layer = 8
 collision_mask = 2147483648
 
 [node name="CollisionShape" type="CollisionShape" parent="Body"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, -1.551, 0 )
-shape = SubResource( 13 )
+shape = SubResource( 11 )
 
-[node name="Head" type="Area" parent="."]
-collision_layer = 0
+[node name="Head" type="StaticBody" parent="."]
+collision_layer = 8
 collision_mask = 0
 
 [node name="CollisionShape" type="CollisionShape" parent="Head"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0572776, 1.21237, 0.0932558 )
 shape = SubResource( 12 )
+
+[node name="Sight" type="Area" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape" type="CollisionShape" parent="Sight"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -11.6712 )
+shape = SubResource( 13 )
+[connection signal="body_shape_entered" from="Sight" to="." method="_on_Sight_body_shape_entered"]

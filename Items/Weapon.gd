@@ -8,13 +8,17 @@ export var spread = Vector2(0,0)
 export(float) var stability = 2
 export var kick = Vector2(0,0)
 export(float) var drift = 1
+export(int) var ammo = 6
 
 func equip(target):
+	print("equiped")
 	get_parent().remove_child(self)
 	target.find_node("Hand").add_child(self)
 	mode = RigidBody.MODE_STATIC
 	translation = Vector3(0,0,0)
 	rotation = Vector3(0,0,0)
+	if has_node("EquipSFX"):
+		find_node("EquipSFX").play()
 
 func drop():
 	set_as_toplevel(true) #Needed to maintain global position
