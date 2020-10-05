@@ -40,6 +40,7 @@ material/13 = null
 material/14 = null
 
 [node name="RayCast" type="RayCast" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.261744, 0 )
 enabled = true
 cast_to = Vector3( 0, 0, -1000 )
 collision_mask = 9

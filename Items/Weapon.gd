@@ -1,6 +1,7 @@
 extends RigidBody
 
 onready var b_decal = preload("res://Items/BulletDecal.tscn")
+onready var Aim = find_node("RayCast")
 
 export(float) var damage = 1
 export(float) var crit = 2

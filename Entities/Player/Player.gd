@@ -86,28 +86,32 @@ func _physics_process(delta):
 			Body.equip(self)
 			print("Sucess!")
 	#WEAPON LOGIC
-	if $Head/Hand.get_child_count() > 1:
+	if $Head/Hand.get_child_count() > 0:
 		var Target = $Head/Camera/Aim.get_collision_point()
-		var Weapon = $Head/Hand.get_child(1)
+		var Weapon = $Head/Hand.get_child(0)
 		#Weapon adjustment (Needs lerping)
 		if $Head/Camera/Aim.is_colliding():
-			$Head/Hand/Pointer.look_at(Target,Vector3.UP)
+			Weapon.Aim.look_at(Target, Vector3.UP)
 		else:
-			$Head/Hand/Pointer.rotation = $Head/Camera.rotation
-		Weapon.rotation += ($Head/Hand/Pointer.rotation - Weapon.rotation) / 10
+			Weapon.Aim.rotation = Vector3(0,0,0)
+		if Input.is_action_pressed("secondary"):
+			$Head/Hand.translation += (Vector3(0, -0.55, -1) - $Head/Hand.translation) / 10
+			$Head/Camera.fov = 50
+			$Head/Pointer.rotation = Vector3(0,0,0)
+		else:
+			$Head/Hand.translation += (Vector3(0.6, -0.55, -1) - $Head/Hand.translation) / 10
+			$Head/Camera.fov = 70
+			if $Head/Camera/Aim.is_colliding():
+				$Head/Pointer.look_at(Target,Vector3.UP)
+			else:
+				$Head/Pointer.rotation = $Head/Camera.rotation
+		Weapon.rotation += ($Head/Pointer.rotation - Weapon.rotation) / 10
 		#Shooting
 		if Input.is_action_just_pressed("primary") and Weapon.has_method("shoot"):
 			Weapon.shoot(self)
 		#Dropping
 		if Input.is_action_just_pressed("drop"):
 			Weapon.drop()
-	#AIMING
-	if Input.is_action_pressed("secondary"):
-		$Head/Hand.translation += (Vector3(0, -0.55, -0.5) - $Head/Hand.translation) / 10
-		$Head/Camera.fov = 60
-	else:
-		$Head/Hand.translation += (Vector3(0.6, -0.55, -1) - $Head/Hand.translation) / 10
-		$Head/Camera.fov = 70
 	#KICK
 	rotation.y += angular_velocity.x
 	$Head/Camera.rotation /= 2
