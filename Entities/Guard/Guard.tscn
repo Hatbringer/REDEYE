@@ -55,13 +55,13 @@ animations = [ {
 "speed": 10.0
 } ]
 
-[sub_resource type="BoxShape" id=13]
+[sub_resource type="BoxShape" id=11]
 extents = Vector3( 4, 2, 12 )
 
-[sub_resource type="SphereShape" id=14]
+[sub_resource type="SphereShape" id=12]
 radius = 0.5
 
-[sub_resource type="CapsuleShape" id=15]
+[sub_resource type="CapsuleShape" id=13]
 radius = 0.6
 height = 1.2
 
@@ -81,7 +81,7 @@ pixel_size = 0.05
 billboard = 2
 shaded = true
 frames = SubResource( 10 )
-frame = 2
+frame = 6
 playing = true
 
 [node name="Sight" type="Area" parent="."]
@@ -90,7 +90,7 @@ collision_mask = 2
 
 [node name="CollisionShape" type="CollisionShape" parent="Sight"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -11.6712 )
-shape = SubResource( 13 )
+shape = SubResource( 11 )
 
 [node name="Cooldown" type="Timer" parent="."]
 wait_time = 0.1
@@ -117,7 +117,7 @@ collision_mask = 8
 
 [node name="CollisionShape" type="CollisionShape" parent="Head"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0 )
-shape = SubResource( 14 )
+shape = SubResource( 12 )
 
 [node name="Body" type="Area" parent="." groups=[
 "normal",
@@ -128,6 +128,6 @@ collision_mask = 8
 
 [node name="CollisionShape" type="CollisionShape" parent="Body"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0.1, 0 )
-shape = SubResource( 15 )
+shape = SubResource( 13 )
 [connection signal="body_shape_entered" from="Sight" to="." method="_on_Sight_body_shape_entered"]
 [connection signal="timeout" from="Reaction" to="." method="_on_Reaction_timeout"]

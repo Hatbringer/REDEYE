@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/BasicTest.obj-9e3ce0686a1f94dfc3d8ebaf56f36d00.mesh"
+
+[deps]
+
+files=[ "res://.import/BasicTest.obj-9e3ce0686a1f94dfc3d8ebaf56f36d00.mesh" ]
+
+source_file="res://Tiles/BasicTest.obj"
+dest_files=[ "res://.import/BasicTest.obj-9e3ce0686a1f94dfc3d8ebaf56f36d00.mesh", "res://.import/BasicTest.obj-9e3ce0686a1f94dfc3d8ebaf56f36d00.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

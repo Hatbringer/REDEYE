@@ -12,7 +12,7 @@ func _physics_process(delta):
 	linear_velocity = move_and_slide(linear_velocity, Vector3.UP)
 	#FRICTION
 	linear_velocity.x /= 1.1
-	linear_velocity.y /= 1.1
+	linear_velocity.z /= 1.1
 	
 	#STATE
 	if has_method(state):

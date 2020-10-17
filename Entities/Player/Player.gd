@@ -1,7 +1,7 @@
 extends KinematicBody
 
-const height = {crouch = 1.5, stand = 4}
-const speed = {walk = 1.5, run = 4, crouch = 1, air = 0.2}
+const height = {crouch = 1.5, stand = 3.4}
+const speed = {walk = 1.75, run = 3.5, crouch = 1, air = 0.2}
 const friction = {ground = 0.7, air = 0.98}
 const sensitivity = {mouse = 0.12}
 const gravity = {up = 40, down = 50}
@@ -37,6 +37,8 @@ func _physics_process(delta):
 		input_speed = speed.walk
 	else:
 		input_speed = speed.run
+	if Input.is_action_pressed("secondary"):
+		input_speed *= 0.7
 	
 	#Crouching
 	if Input.is_action_pressed("crouch"):

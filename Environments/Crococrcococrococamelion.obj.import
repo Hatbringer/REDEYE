@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Crococrcococrococamelion.obj-a9ee82476248cdb64f66981bdc030861.mesh"
+
+[deps]
+
+files=[ "res://.import/Crococrcococrococamelion.obj-a9ee82476248cdb64f66981bdc030861.mesh" ]
+
+source_file="res://Environments/Crococrcococrococamelion.obj"
+dest_files=[ "res://.import/Crococrcococrococamelion.obj-a9ee82476248cdb64f66981bdc030861.mesh", "res://.import/Crococrcococrococamelion.obj-a9ee82476248cdb64f66981bdc030861.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true
