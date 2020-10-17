@@ -5,7 +5,6 @@ var spin = Vector3()
 onready var Model = $Mesh
 
 func shoot(Attacker):
-	$Model/ShootSFX.play()
 	$Anim.play("Shoot")
 	var s = shell.instance()
 	add_child(s)

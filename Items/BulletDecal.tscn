@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Items/BulletDecal.gd" type="Script" id=1]
 
@@ -8,6 +8,22 @@ size = Vector2( 0.3, 0.3 )
 [sub_resource type="SpatialMaterial" id=2]
 flags_transparent = true
 albedo_color = Color( 0.192157, 0.192157, 0.192157, 1 )
+
+[sub_resource type="SpatialMaterial" id=3]
+flags_vertex_lighting = true
+params_billboard_mode = 3
+params_use_alpha_scissor = true
+params_alpha_scissor_threshold = 0.98
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="ParticlesMaterial" id=4]
+initial_velocity = 5.0
+scale = 0.01
+scale_random = 0.1
+
+[sub_resource type="QuadMesh" id=5]
 
 [node name="BulletDecal" type="Spatial"]
 script = ExtResource( 1 )
@@ -22,4 +38,23 @@ material/0 = SubResource( 2 )
 wait_time = 4.0
 one_shot = true
 autostart = true
+
+[node name="Particles" type="Particles" parent="."]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0 )
+material_override = SubResource( 3 )
+emitting = false
+lifetime = 0.3
+one_shot = true
+speed_scale = 3.0
+explosiveness = 0.95
+visibility_aabb = AABB( -1, -1, -1, 2, 2, 2 )
+local_coords = false
+process_material = SubResource( 4 )
+draw_pass_1 = SubResource( 5 )
+
+[node name="Start" type="Timer" parent="."]
+wait_time = 0.001
+one_shot = true
+autostart = true
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="Start" to="Particles" method="set_emitting" binds= [ true ]]

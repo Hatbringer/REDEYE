@@ -9,6 +9,8 @@ points = PoolVector3Array( 0, 0.15, -0.1, 0, -0.15, -0.1, 0.095106, 0.15, -0.030
 [node name="SpentShell" type="RigidBody"]
 transform = Transform( 2.65431e-14, -1.62921e-07, 1, -1, -1.62921e-07, 0, 1.62921e-07, -1, -1.62921e-07, 0, 0, 0 )
 collision_layer = 0
+continuous_cd = true
+can_sleep = false
 script = ExtResource( 2 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
