@@ -10,6 +10,7 @@ export(float) var stability = 2
 export var kick = Vector2(0,0)
 export(float) var drift = 1
 export(int) var ammo = 6
+export(PackedScene) var shell
 
 func equip(target):
 	print("equiped")

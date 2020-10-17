@@ -5,7 +5,11 @@ var spin = Vector3()
 onready var Model = $Mesh
 
 func shoot(Attacker):
-	$ShootSFX.play()
+	$Model/ShootSFX.play()
+	$Anim.play("Shoot")
+	var s = shell.instance()
+	add_child(s)
+	s.set_as_toplevel(true)
 	var current_spread = Vector2(rand_range(-spread.x,spread.x),rand_range(-spread.y,spread.y))
 
 	if $RayCast.is_colliding():

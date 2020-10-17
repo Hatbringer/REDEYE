@@ -116,7 +116,7 @@ func _physics_process(delta):
 			Weapon.drop()
 	#KICK
 	rotation.y += angular_velocity.x
-	$Head/Camera.rotation /= 2
+	$Head/Camera.rotation /= 1.1
 	$Head/Camera.rotation.x += angular_velocity.y
 	angular_velocity /= 1.1
 	
